@@ -137,6 +137,22 @@ RPC communication with Substrate chains is packed in crate [Octopusxt](https://g
 ```
 
 ## Beefy Integration
+[Beefy](https://github.com/paritytech/grandpa-bridge-gadget/blob/8e7d82917e988d7e54ff2ffecdf8461bb9f65c53/docs/beefy.md) is integrated in this milestone. [ClientState](https://github.com/octopus-network/ibc-rs/blob/4c0a6919c284811d6e435bff2d249891a91e40fd/modules/src/clients/ics10_grandpa/client_state.rs#L24) is updated to include MMR root.
+
+```rust
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ClientState {
+    pub chain_id: ChainId,
+    /// block_number is height?
+    pub block_number: u32,
+    /// Block height when the client was frozen due to a misbehaviour
+    pub frozen_height: Option<Height>,
+    pub block_header: BlockHeader,
+    pub latest_commitment: Commitment,  // <== MMR root is included
+    pub validator_set: ValidatorSet,
+}
+```
+
 When implementing Beefy protocol based on Grandpa consensus, there are 3 kinds of verifications in hierarchy.
 * The top tier verification is MMR root verification, by collecting sufficient validators' valid signatures. 
 ```rust

@@ -9,17 +9,18 @@ This milestone includes a runnable Substrate chain integrated with the following
 
 | Number | Deliverable       | Commnets                                                |
 | ------ | ----------------- | ------------------------------------------------------------ |
-| 1.     | Substrate chain  |     ???   |
-| 2.     | Relayer |   ???   |
-| 3.     | Vedio Demo           | ??? |
-| 4.     | Design Spec       |  [design](./design.md)                                                            |
+| 1.     | Substrate chain  |     [repo](https://github.com/octopus-network/substrate/tree/feature/beefy)   |
+| 2.     | Relayer |   [repo](https://github.com/octopus-network/ibc-rs/tree/feature/beefy)   |
+| 3.     | Substrate-Ibc Pallet | [repo](https://github.com/octopus-network/substrate-ibc) |
+| 4.     | Design Spec       |  [Design](./design.md)                                                            |
 | 5.     | Operation Guide, including testing script       |  Right below                                                            |
+| 6.     | Vedio Demo           | [Vedio](https://www.youtube.com/watch?v=MLdwqpAu_ZA) |
 
 # Operation Guide
 ## Launch 2 IBC Enabled Substrate Chains Locally
 ```bash
-git clone ??? 
-cd ???
+git clone https://github.com/octopus-network/substrate/tree/feature/beefy
+cd substrate
 rm -rf .ibc-*
 cargo build -p node-template
 
@@ -49,9 +50,32 @@ python run.py -c ../config.toml --cmd ../target/debug/hermes # Run automatic e2e
 view README.md  # More details of the testing 
 ```
 
-Wait until you see events of `WriteAcknowledgement` & `ReceivePacket` on the explorer of parachain like below. It takes over 20 mins.
+Events below will be detected by polkadot.js in sequence and display on the frontend. Whereas `SendPacket` & `AcknowledgementPacket` envets are emitted from the chain initiated the packet transfer, and `WriteAcknowledgement` & `ReceivePacket` are from the other chain. It takes over 20 mins.
 
-???
+![SendPacket](assets/SendPacket.png)
+
+![RecvPacket](assets/RecvPacket.png)
+
+![AckPacket](assets/AckPacket.png)
+
+## Commands in [Vedio Demo](https://www.youtube.com/watch?v=MLdwqpAu_ZA)
+```bash
+# in terminal 1: lanch a chain to be recognized as ibc-0 by the relayer
+./target/debug/node-template --dev -d .ibc-0 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
+
+# in terminal 2: lanch a chain to be recognized as ibc-1 by the relayer
+ ./target/debug/node-template --dev -d .ibc-1 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
+
+# in terminal 3: establish IBC clients, connections, and channels
+ RUST_BACKTRACE=full  ./target/debug/hermes -c  config.toml create channel ibc-0 ibc-1 --port-a transfer --port-b transfer -o unordered
+
+# in terminal 4: start a relayer
+RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start
+
+# in terminal 3: trigger packet transfer
+./target/debug/hermes -c config.toml tx raw ft-transfer ibc-1 ibc-0 transfer channel-0 9999 -o 9999 -n 1 -t 9999
+```
+
 
 # Pending Issues
 ## Relevant Issues in Github
