@@ -38,7 +38,7 @@ cargo build -p node-template
 
 ### Compile the Relayer
 ```bash
-git clone ???
+git clone https://github.com/octopus-network/ibc-rs/tree/feature/beefy
 cd ibc-rs
 cargo build
 ```
@@ -50,7 +50,7 @@ python run.py -c ../config.toml --cmd ../target/debug/hermes # Run automatic e2e
 view README.md  # More details of the testing 
 ```
 
-Events below will be detected by polkadot.js in sequence and display on the frontend. Whereas `SendPacket` & `AcknowledgementPacket` envets are emitted from the chain initiated the packet transfer, and `WriteAcknowledgement` & `ReceivePacket` are from the other chain. It takes over 20 mins.
+After the packet transfer completes, events below will be detected by polkadot.js in sequence and display on the frontend(e.g., https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer). Whereas `SendPacket` & `AcknowledgementPacket` envets are emitted from the chain initiated the packet transfer, and `WriteAcknowledgement` & `ReceivePacket` are from the other chain. It takes over 20 mins.
 
 ![SendPacket](assets/SendPacket.png)
 
@@ -83,6 +83,7 @@ RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start
 * [new variant needed in the enum of commitment_proof](https://github.com/informalsystems/ibc-rs/issues/1945)
 * [height.increment() not needed for Beefy](https://github.com/informalsystems/ibc-rs/issues/1845)
 * [Allow Timeout UNORDERED channel without proof of absence](https://github.com/cosmos/ibc/issues/620): Some chains do not have ability to provide proof of absence, like Substrate based chains. Therefore, the proof of [timeout](Some chains do not have ability to provide proof of absence) is pending in code [here](https://github.com/octopus-network/ibc-rs/blob/6e5f6c196dad0acde4aafb379b39bd01ba5a0724/relayer/src/chain/substrate.rs#L1518) and [here](https://github.com/octopus-network/ibc-rs/blob/6e5f6c196dad0acde4aafb379b39bd01ba5a0724/relayer/src/chain/substrate.rs#L1521).
+* [commitment_proof for non-Cosmos chain](https://github.com/confio/ics23/issues/80)
 
 ## Other Issues
 * Slow process: It takes about 15 min to establish IBC client, connection, and channel to link the 2 chains, and about 10 min to complete a packet transfer.
