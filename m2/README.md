@@ -14,7 +14,7 @@ This milestone includes a runnable Substrate chain integrated with the following
 | 3.     | Substrate-Ibc Pallet | [repo](https://github.com/octopus-network/substrate-ibc) |
 | 4.     | Design Spec       |  [Design](./design.md)                                                            |
 | 5.     | Operation Guide, including testing script       |  Right below                                                            |
-| 6.     | Vedio Demo           | [Vedio](https://www.youtube.com/watch?v=MLdwqpAu_ZA) |
+| 6.     | Video Demo           | [Video](https://www.youtube.com/watch?v=MLdwqpAu_ZA) |
 
 # Operation Guide
 ## Launch 2 IBC Enabled Substrate Chains Locally
@@ -58,7 +58,7 @@ After the packet transfer completes, events below will be detected by polkadot.j
 
 ![AckPacket](assets/AckPacket.png)
 
-## Commands in [Vedio Demo](https://www.youtube.com/watch?v=MLdwqpAu_ZA)
+## Commands in [Video Demo](https://www.youtube.com/watch?v=MLdwqpAu_ZA)
 ```bash
 # in terminal 1: lanch a chain to be recognized as ibc-0 by the relayer
 ./target/debug/node-template --dev -d .ibc-0 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
