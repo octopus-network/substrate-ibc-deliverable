@@ -157,6 +157,9 @@ When implementing Beefy protocol based on Grandpa consensus, there are 3 kinds o
 * The top tier verification is MMR root verification, by collecting sufficient validators' valid signatures. 
 ```rust
 // in relayer
+Ok(ChainRequest::WebSocketUrl { reply_to }) => {
+    self.websocket_url(reply_to)?
+},
 Ok(ChainRequest::UpdateMmrRoot { src_chain_websocket_url, dst_chain_websocket_url, reply_to }) => {
     self.update_mmr_root(src_chain_websocket_url,dst_chain_websocket_url,reply_to,)?
 },
