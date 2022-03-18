@@ -7,7 +7,7 @@ This milestone includes a runnable Substrate chain integrated with the following
 * ICS023 Vector Commitments 
 * ICS024 Host Requirements
 
-| Number | Deliverable       | Commnets                                                |
+| Number | Deliverable       | Comments                                                |
 | ------ | ----------------- | ------------------------------------------------------------ |
 | 1.     | Substrate chain  |     [repo](https://github.com/octopus-network/substrate/tree/feature/beefy)   |
 | 2.     | Relayer |   [repo](https://github.com/octopus-network/ibc-rs/tree/feature/beefy)   |
@@ -50,7 +50,7 @@ python run.py -c ../config.toml --cmd ../target/debug/hermes # Run automatic e2e
 view README.md  # More details of the testing 
 ```
 
-After the packet transfer completes, events below will be detected by polkadot.js in sequence and display on the frontend(e.g., https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer). Whereas `SendPacket` & `AcknowledgementPacket` envets are emitted from the chain initiated the packet transfer, and `WriteAcknowledgement` & `ReceivePacket` are from the other chain. It takes over 20 mins.
+After the packet transfer completes, events below will be detected by polkadot.js in sequence and displayed on the frontend(e.g., https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer). Whereas `SendPacket` & `AcknowledgementPacket` events are emitted from the chain initiated the packet transfer, and `WriteAcknowledgement` & `ReceivePacket` are from the other chain. It takes over 20 mins.
 
 ![SendPacket](assets/SendPacket.png)
 
@@ -82,7 +82,7 @@ RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start
 * [Client update based on Beefy protocol](https://github.com/informalsystems/ibc-rs/issues/1775)
 * [new variant needed in the enum of commitment_proof](https://github.com/informalsystems/ibc-rs/issues/1945)
 * [height.increment() not needed for Beefy](https://github.com/informalsystems/ibc-rs/issues/1845)
-* [Allow Timeout UNORDERED channel without proof of absence](https://github.com/cosmos/ibc/issues/620): Some chains do not have ability to provide proof of absence, like Substrate based chains. Therefore, the proof of [timeout](Some chains do not have ability to provide proof of absence) is pending in code [here](https://github.com/octopus-network/ibc-rs/blob/6e5f6c196dad0acde4aafb379b39bd01ba5a0724/relayer/src/chain/substrate.rs#L1518) and [here](https://github.com/octopus-network/ibc-rs/blob/6e5f6c196dad0acde4aafb379b39bd01ba5a0724/relayer/src/chain/substrate.rs#L1521).
+* [Allow Timeout UNORDERED channel without proof of absence](https://github.com/cosmos/ibc/issues/620): Some chains do not have the ability to provide proof of absence, like Substrate based chains. Therefore, the proof of [timeout](Some chains do not have the ability to provide proof of absence) is pending in code [here](https://github.com/octopus-network/ibc-rs/blob/6e5f6c196dad0acde4aafb379b39bd01ba5a0724/relayer/src/chain/substrate.rs#L1518) and [here](https://github.com/octopus-network/ibc-rs/blob/6e5f6c196dad0acde4aafb379b39bd01ba5a0724/relayer/src/chain/substrate.rs#L1521).
 * [commitment_proof for non-Cosmos chain](https://github.com/confio/ics23/issues/80)
 
 ## Other Issues

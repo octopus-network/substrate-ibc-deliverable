@@ -37,7 +37,7 @@ pub enum AnyConsensusState {
 // --snip--
 }
 ```
-### Involking RPC to Communicate with Substrate Chain 
+### Invoking RPC to Communicate with Substrate Chain 
 RPC communication with Substrate chains is packed in crate [Octopusxt](https://github.com/octopus-network/octopusxt), which is a wrapper of [Subxt](https://github.com/paritytech/subxt).
 
 * Implement monitor for events from Substrate chain
@@ -153,7 +153,7 @@ pub struct ClientState {
 }
 ```
 
-When implementing Beefy protocol based on Grandpa consensus, there are 3 kinds of verifications in hierarchy.
+When implementing Beefy protocol based on Grandpa consensus, there are 3 kinds of verifications in a hierarchy.
 * The top tier verification is MMR root verification, by collecting sufficient validators' valid signatures. 
 ```rust
 // in relayer
