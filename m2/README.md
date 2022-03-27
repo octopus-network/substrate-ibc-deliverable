@@ -17,12 +17,13 @@ This milestone includes a runnable Substrate chain integrated with the following
 | 6.     | Video Demo           | [Video](https://www.youtube.com/watch?v=MLdwqpAu_ZA) |
 
 # Operation Guide
+* Please head for [this section](#slow-process) to work around the slow process problem.
 ## Launch 2 IBC Enabled Substrate Chains Locally
-```bash
-git clone https://github.com/octopus-network/substrate/tree/feature/beefy
+```shell script
+git clone --branch feature/beefy https://github.com/octopus-network/substrate.git
 cd substrate
 rm -rf .ibc-*
-cargo build -p node-template
+cargo build -p node-template # generate ./target/debug/node-template
 
 # in terminal 1: lanch a chain to be recognized as ibc-0 by the relayer
 ./target/debug/node-template --dev -d .ibc-0 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
@@ -38,7 +39,7 @@ cargo build -p node-template
 
 ### Compile the Relayer
 ```bash
-git clone https://github.com/octopus-network/ibc-rs/tree/feature/beefy
+git clone --branch ibc-m2-rc1 https://github.com/octopus-network/ibc-rs.git
 cd ibc-rs
 cargo build
 ```
@@ -86,4 +87,37 @@ RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start
 * [commitment_proof for non-Cosmos chain](https://github.com/confio/ics23/issues/80)
 
 ## Other Issues
-* Slow process: It takes about 15 min to establish IBC client, connection, and channel to link the 2 chains, and about 10 min to complete a packet transfer.
+### Slow Process
+* Issue: By tag `ibc-m2-rc1` of `ibc-rs`, it takes about 15 min to establish IBC client, connection, and channel to link the 2 chains, and about 10 min to complete a packet transfer.
+* Cause: The integration of update MMR root function causes the slowness; [current integration](https://github.com/octopus-network/ibc-rs/blob/330b1a554c3223b07121ca83af5eccffc3f56a2b/relayer/src/foreign_client.rs#L917) results in [relayer waiting a long time for MMR root to be updated](https://github.com/octopus-network/ibc-rs/blob/330b1a554c3223b07121ca83af5eccffc3f56a2b/relayer/src/foreign_client.rs#L927). The complete fix depends on the Github issue [Client update based on Beefy protocol](https://github.com/informalsystems/ibc-rs/issues/1775).
+* Workaround: Running the MMR update service as an individual process away from the relayer reduces the duration significantly. About 6 min to establish paths to link to the 2 chains; 2 min to complete a packet transfer. You may refer to the [video demo of the workaround](https://www.youtube.com/watch?v=yDLtsGGU9Mw) and the commands in the video below.
+```shell script
+git clone --branch feature/beefy https://github.com/octopus-network/substrate.git
+cd substrate
+rm -rf .ibc-*
+cargo build -p node-template # generate ./target/debug/node-template
+
+# in terminal 1: lanch a chain to be recognized as ibc-0 by the relayer
+./target/debug/node-template --dev -d .ibc-0 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
+
+# in terminal 2: lanch a chain to be recognized as ibc-1 by the relayer
+./target/debug/node-template --dev -d .ibc-1 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
+
+# in terminal 3: establish IBC clients, connections, and channels
+git clone --branch --ibc-m2-rc2 https://github.com/octopus-network/ibc-rs.git # Without MMR update service
+cd ibc-rs
+cargo build # generate ./target/debug/hermes
+RUST_BACKTRACE=full  ./target/debug/hermes -c  config.toml create channel ibc-0 ibc-1 --port-a transfer --port-b transfer -o unordered 
+
+# in terminal 4: start mmr root update service
+sleep 10
+git clone https://github.com/octopus-network/octopusxt.git
+cd octopusxt
+sleep 10;cargo test test_update_client_state_service -- --nocapture 
+
+# in terminal 5: start a relayer
+RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start  # Without MMR update service
+
+# in terminal 3: trigger packet transfer
+sleep 20;./target/debug/hermes -c config.toml tx raw ft-transfer ibc-1 ibc-0 transfer channel-0 9999 -o 9999 -n 1 -t 9999
+```
