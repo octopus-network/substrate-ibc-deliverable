@@ -94,6 +94,8 @@ RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start
 ```shell script
 git clone --branch feature/beefy https://github.com/octopus-network/substrate.git
 cd substrate
+git submodule update --init
+rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
 cargo build -p node-template # generate ./target/debug/node-template
 
@@ -104,7 +106,7 @@ cargo build -p node-template # generate ./target/debug/node-template
 ./target/debug/node-template --dev -d .ibc-1 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
 
 # in terminal 3: establish IBC clients, connections, and channels
-git clone --branch --ibc-m2-rc2 https://github.com/octopus-network/ibc-rs.git # Without MMR update service
+git clone --branch ibc-m2-rc2 https://github.com/octopus-network/ibc-rs.git # Without MMR update service
 cd ibc-rs
 cargo build # generate ./target/debug/hermes
 RUST_BACKTRACE=full  ./target/debug/hermes -c  config.toml create channel ibc-0 ibc-1 --port-a transfer --port-b transfer -o unordered 
