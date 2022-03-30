@@ -22,6 +22,8 @@ This milestone includes a runnable Substrate chain integrated with the following
 ```shell script
 git clone --branch feature/beefy https://github.com/octopus-network/substrate.git
 cd substrate
+git submodule update --init
+rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
 cargo build -p node-template # generate ./target/debug/node-template
 
