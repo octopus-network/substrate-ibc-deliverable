@@ -23,6 +23,7 @@ This milestone includes a runnable Substrate chain integrated with the following
 git clone --branch feature/beefy https://github.com/octopus-network/substrate.git
 cd substrate
 git submodule update --init
+git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
 cargo build -p node-template # generate ./target/debug/node-template
@@ -97,6 +98,7 @@ RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start
 git clone --branch feature/beefy https://github.com/octopus-network/substrate.git
 cd substrate
 git submodule update --init
+git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
 cargo build -p node-template # generate ./target/debug/node-template
