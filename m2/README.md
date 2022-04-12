@@ -94,6 +94,9 @@ RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start
 * Issue: By tag `ibc-m2-rc1` of `ibc-rs`, it takes about 15 min to establish IBC client, connection, and channel to link the 2 chains, and about 10 min to complete a packet transfer.
 * Cause: The integration of update MMR root function causes the slowness; [current integration](https://github.com/octopus-network/ibc-rs/blob/330b1a554c3223b07121ca83af5eccffc3f56a2b/relayer/src/foreign_client.rs#L917) results in [relayer waiting a long time for MMR root to be updated](https://github.com/octopus-network/ibc-rs/blob/330b1a554c3223b07121ca83af5eccffc3f56a2b/relayer/src/foreign_client.rs#L927). The complete fix depends on the Github issue [Client update based on Beefy protocol](https://github.com/informalsystems/ibc-rs/issues/1775).
 * Workaround: Running the MMR update service as an individual process away from the relayer reduces the duration significantly. About 6 min to establish paths to link to the 2 chains; 2 min to complete a packet transfer. You may refer to the [video demo of the workaround](https://www.youtube.com/watch?v=yDLtsGGU9Mw) and the commands in the video below.
+* Check the events via polkadot.js: 
+    - : https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer
+    - https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/explorer
 ```shell script
 git clone --branch feature/beefy https://github.com/octopus-network/substrate.git
 cd substrate
@@ -116,7 +119,6 @@ cargo build # generate ./target/debug/hermes
 RUST_BACKTRACE=full  ./target/debug/hermes -c  config.toml create channel ibc-0 ibc-1 --port-a transfer --port-b transfer -o unordered 
 
 # in terminal 4: start mmr root update service
-sleep 10
 git clone https://github.com/octopus-network/octopusxt.git
 cd octopusxt
 sleep 10;cargo test test_update_client_state_service -- --nocapture 
