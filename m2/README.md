@@ -95,7 +95,7 @@ RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start
 * Cause: The integration of update MMR root function causes the slowness; [current integration](https://github.com/octopus-network/ibc-rs/blob/330b1a554c3223b07121ca83af5eccffc3f56a2b/relayer/src/foreign_client.rs#L917) results in [relayer waiting a long time for MMR root to be updated](https://github.com/octopus-network/ibc-rs/blob/330b1a554c3223b07121ca83af5eccffc3f56a2b/relayer/src/foreign_client.rs#L927). The complete fix depends on the Github issue [Client update based on Beefy protocol](https://github.com/informalsystems/ibc-rs/issues/1775).
 * Workaround: Running the MMR update service as an individual process away from the relayer reduces the duration significantly. About 6 min to establish paths to link to the 2 chains; 2 min to complete a packet transfer. You may refer to the [video demo of the workaround](https://www.youtube.com/watch?v=yDLtsGGU9Mw) and the commands in the video below.
 * Check the events via polkadot.js: 
-    - : https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer
+    - https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer
     - https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/explorer
 ```shell script
 git clone --branch feature/beefy https://github.com/octopus-network/substrate.git
