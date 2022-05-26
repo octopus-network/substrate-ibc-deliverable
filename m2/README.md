@@ -9,12 +9,13 @@
 
 | Number | Deliverable       | Comments                                                |
 | ------ | ----------------- | ------------------------------------------------------------ |
-| 1.     | Substrate chain  |     [repo](https://github.com/octopus-network/substrate/)   |
-| 2.     | Ibc rs |   [repo](https://github.com/octopus-network/ibc-rs/)   |
-| 3.     | Substrate-Ibc Pallet | [repo](https://github.com/octopus-network/substrate-ibc) |
-| 4.     | Ibc Frontend Demo | [repo](https://github.com/octopus-network/ibc-frontend-demo/) |
-| 5.     | Design Spec       |  [Design](./design.md)                                                            |
-| 6.     | Operation Guide    |  [Guide](guide.md)                                                            |
-| 7.     | Video Demo           | [Video]() |
+| 1.     | Substrate chain(ibc-0) |     [repo](https://github.com/octopus-network/substrate/tree/feature/ics20-ibc-0)   |
+| 2.     | Substrate chain(ibc-1) |     [repo](https://github.com/octopus-network/substrate/tree/feature/ics20-ibc-1)   |
+| 3.     | Ibc rs |   [repo](https://github.com/octopus-network/ibc-rs/tree/feature/ics20)   |
+| 4.     | Substrate-Ibc Pallet | [repo](https://github.com/octopus-network/substrate-ibc/tree/feature/ics20) |
+| 5.     | Ibc Frontend Demo | [repo](https://github.com/octopus-network/ibc-frontend-demo/) |
+| 6.     | Design Spec       |  [Design](./design.md)                                                            |
+| 7.     | Operation Guide    |  [Guide](guide.md)                                                            |
+| 8.     | Video Demo           | [Video]() |
 
 

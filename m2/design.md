@@ -1,12 +1,13 @@
 # Overview  
   This document describes the reference implementation of the ics20 spec in pallet-ibc and ibc-rs.
-# Requirments
+
+## Requirments
 * Testnet involving two IBC-enabled Substrate chains capable of transferring a token following ICS 020
 * UI and Cli supporting the testnet   
-![image](transfer.jpg)   
+![image](assets/transfer.jpg)   
 
-# Use Cases     
-![image](usecase.png)   
+## Use Cases     
+![image](assets/usecase.png)   
 
 * transfer fungible token：send ICS-20 fungible token transfer packets
 
@@ -14,15 +15,16 @@
 
 * relay ack packet：relay acknowledgments to the original source of the packets.
 
-# Architecture & High Level
-## System Interaction
-![image](si.png)  
-## Architecture
-![image](arch.png)  
-## Interface
-![image](interface.png)
+## Architecture & High Level
 
-## Data Model
-![image](datamodel.png)
+### System Interaction
+![image](assets/si.png)  
 
-# 
+### Architecture
+![image](assets/arch.png)  
+
+### Interface
+![image](assets/interface.png)
+
+### Data Model
+![image](assets/datamodel.png)
