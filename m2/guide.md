@@ -29,7 +29,7 @@ RUST_BACKTRACE=full RUST_LOG="runtime::pallet-ibc=trace,ibc-rs=trace" ./target/d
 git clone --branch feature/ics20 https://github.com/octopus-network/ibc-rs.git
 cd ibc-rs
 cargo build
-RUST_BACKTRACE=full  ./target/debug/hermes -c config.toml  create channel --port-a transfer --port-b transfer ibc-0 -c ibc-1 -o unordered --new-client-connection -y
+RUST_BACKTRACE=full  ./target/debug/hermes -c config.toml  create channel --port-a transfer --port-b transfer ibc-0 -c ibc-1 -o unordered --new-client-connection
 ```
 
 * Start mmr root update service in terminal 4
