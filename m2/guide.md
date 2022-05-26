@@ -4,7 +4,7 @@
 
 * Launch 2 IBC Enabled Substrate Chains Locally in terminal 1/2
 ```bash
-git clone --branch feature/ics20-ibc-1 https://github.com/octopus-network/substrate.git substrate-oct
+git clone --branch feature/ics20-ibc-0 https://github.com/octopus-network/substrate.git substrate-oct
 
 cd substrate-oct
 git submodule update --init
