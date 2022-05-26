@@ -1,6 +1,6 @@
-## Operation Guide
+# Operation Guide
 
-### Transfer tokens by CLI
+## Transfer tokens by CLI
 *  Launch 2 IBC Enabled Substrate Chains Locally
 ```bash
 git clone --branch feature/beefy https://github.com/octopus-network/substrate.git
@@ -59,7 +59,7 @@ RUST_BACKTRACE=full
 ./target/debug/hermes -c   config.toml create channel ibc-0 ibc-1 --port-a transfer --port-b transfer -o unordered 
 
 RUST_BACKTRACE=full 
-./target/debug/hermes -c  -c config.toml start  # Without MMR update service
+./target/debug/hermes -c  -c config.toml start  
 
 ```
 
@@ -76,7 +76,7 @@ RUST_BACKTRACE=full
 ```
 
 
-### Transfer fungible tokens by UI
+## Transfer fungible tokens by UI
 * Install UI demo
 ```bash
 # in terminal 6: start UI demo
@@ -92,7 +92,7 @@ yarn start
 
 
 
-### Video Demo
-  Pls refer to [Youtube]()
-### Issues
+## Video Demo
+* Pls refer to [Youtube]()
+## Issues
   N/A

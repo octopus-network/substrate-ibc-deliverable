@@ -1,4 +1,4 @@
-# Substrate-IBC Milestone 2 Deliverable
+# Substrate-IBC Milestone 1 Deliverable
 
 This milestone includes a runnable Substrate chain integrated with the following modules in [ibc-rs](https://github.com/informalsystems/ibc-rs),  
 * ICS002 Client Semantics
