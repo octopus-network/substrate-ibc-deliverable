@@ -4,9 +4,10 @@
 
 * Launch 2 IBC Enabled Substrate Chains Locally in terminal 1/2
 ```bash
-git clone --branch feature/ics20-ibc-0 https://github.com/octopus-network/substrate.git substrate-oct
+git clone --branch features/ics20-demo https://github.com/octopus-network/substrate.git substrate-oct
 
 cd substrate-oct
+git reset --hard 835f0ed3e8c360a431f84a72fd76ed3670be6b9e
 git submodule update --init
 git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
