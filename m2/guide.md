@@ -34,12 +34,12 @@ rm -rf .ibc-*
 # in terminal 1: build and lanch a chain to be recognized as ibc-0 by the relayer
 cd ibc-0
 cargo build -p node-template 
-./target/debug/node-template --dev -d .ibc-0 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
+./target/debug/node-template --dev -d .ibc-0 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
 
 # in terminal 2: build and lanch a chain to be recognized as ibc-1 by the relayer
 cd ibc-1
 cargo build -p node-template
-./target/debug/node-template --dev -d .ibc-1 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
+./target/debug/node-template --dev -d .ibc-1 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true 
 
 
 ```
