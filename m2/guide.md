@@ -29,6 +29,11 @@ RUST_BACKTRACE=full RUST_LOG="runtime::pallet-ibc=trace,ibc-rs=trace" ./target/d
 git clone --branch feature/ics20 https://github.com/octopus-network/ibc-rs.git
 cd ibc-rs
 cargo build
+# import substrate account
+./target/debug/hermes -c config.toml keys add ibc-0 -f ./david_seed.json
+./target/debug/hermes -c config.toml keys add ibc-1 -f ./davirain_seed.json
+
+# create channel
 RUST_BACKTRACE=full  ./target/debug/hermes -c config.toml  create channel --port-a transfer --port-b transfer ibc-0 -c ibc-1 -o unordered --new-client-connection
 ```
 
@@ -55,67 +60,35 @@ RUST_BACKTRACE=full ./target/debug/hermes -c config.toml start
 ```bash
 git clone --branch feature/v0.9.13 https://github.com/octopus-network/octopusxt.git
 cd octopusxt
-# alice in Substrate chain ibc-0 transfer ATOM to bob in Substrate chain ibc-1
+# alice in Substrate chain ibc-0 transfer 2000000000000000000000000 ATOM to bob in Substrate chain ibc-1
 cargo run -- ibc-transfer ws://localhost:9944  alice bob ATOM transfer channel-0 2000000000000000000000000 99999 9999999999999999999
 # bob in Substrate chain ibc-1 redeem ATOM back to alice in Substrate chain ibc-0
-cargo run -- ibc-transfer ws://localhost:8844 bob alice ibc/04C1A8B4EC211C89630916F8424F16DC9611148A5F300C122464CE8E996AABD0 transfer channel-0 200000000000000000000000 9999 9999999999999999999
+cargo run -- ibc-transfer ws://localhost:8844 bob alice ibc/04C1A8B4EC211C89630916F8424F16DC9611148A5F300C122464CE8E996AABD0 transfer channel-0 300000000000000000000000 9999 9999999999999999999
 ```
 
 * Verify events in polkadot.js
 - Verify send packet event of chain ibc-0 in https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer
+
 ![image](assets/ics20-escrow-event.png)
 - Verify send packet event of chain ibc-0 in https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/explorer
+
 ![image](assets/ics20-receive-event.png)
 
 * Verify balance in demo front-end
-
-* Transfer fungible tokens
 ```bash
-# in terminal 5
-# transfer fungible tokens from ibc-0 to ibc-1
-./target/debug/hermes -c config.toml tx raw ft-transfer ibc-1 ibc-0 transfer channel-0 100000000000000000000 -o 9999 -d ATOM
-
-# get hash denom
-cd octopusxt 
-cargo run -- denom-trace transfer channel-0 ATOM
-
-# transfer fungible tokens from ibc-1 back to ibc-0
-./target/debug/hermes -c config.toml tx raw ft-transfer ibc-0 ibc-1 transfer channel-0 100000000000000000000 -o 9999 -d ibc/04C1A8B4EC211C89630916F8424F16DC9611148A5F300C122464CE8E996AABD0
-```
-
-transfer ATOM tokens from ibc-0(david) to ibc-1(davirain),
-this is result ibc-1 davirain receive ATOM token from ibc-0 david.
-
-![image](assets/ibc-1-davirain-asset.png)
-
-
-transfer `ibc/04C1A8B4EC211C89630916F8424F16DC9611148A5F300C122464CE8E996AABD0` tokens from ibc-1(davirain) back to ibc-0(david),
-this result ibc-0 davirain burun ATOM token
-
-![image](assets/burn-ibc-1-asset.png)
-
-this result ibc-0 will unescorw token from escown account
-
-![image](assets/ibc-0-asset.png)
-
-
-## Transfer fungible tokens by UI
-* Install UI demo
-```bash
-# in terminal 6: start UI demo
-git clone git@github.com:octopus-network/ibc-frontend-demo.git
-cd substrate-front-end-template
-# install dependencies
+git clone https://github.com/octopus-network/ibc-frontend-demo.git
+cd ibc-frontend-demo
 yarn install
-# start service
 yarn start
 ```
-* Open your browser and visit http://localhost:8000/
-* Transfer tokens by ui
+Visit http://localhost:8000/octopus-network/ibc-frontend-demo and verifying balance as the capture below
+![image](assets/ics20-balance-verify.png)
 
 
+* Transfer fungible tokens on browser
+Visit http://localhost:8000/octopus-network/ibc-frontend-demo and refer to the instructions in the video
 
 ## Video Demo
-  Pls refer to [Youtube]()
+  Pls refer to [Youtube](https://www.youtube.com/watch?v=gWw_o0EROlk)
 ## Issues
   N/A
