@@ -9,7 +9,7 @@ in terminal 1:
 git clone --branch feature/ics20-ibc-0 https://github.com/octopus-network/substrate.git substrate-ibc0
 
 cd substrate-ibc0
-# git reset --hard 9cccbd72bf6e276557d4512e720e9f51ea9e63ce
+git reset --hard 9cccbd72bf6e276557d4512e720e9f51ea9e63ce
 git submodule update --init
 git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
