@@ -2,25 +2,41 @@
 
 ## Transfer tokens by CLI
 
-* Launch 2 IBC Enabled Substrate Chains Locally in terminal 1/2
+* Launch 2 IBC enabled Substrate chains locally in 2 terminals
+in terminal 1:
 ```bash
-git clone --branch features/ics20-demo https://github.com/octopus-network/substrate.git substrate-oct
+# in terminal 1:
+git clone --branch feature/ics20-ibc-0 https://github.com/octopus-network/substrate.git substrate-ibc0
 
-cd substrate-oct
-git reset --hard 835f0ed3e8c360a431f84a72fd76ed3670be6b9e
+cd substrate-ibc0
+# git reset --hard 9cccbd72bf6e276557d4512e720e9f51ea9e63ce
 git submodule update --init
 git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
 cargo build -p node-template 
 
-# in terminal 1: build and lanch a chain to be recognized as ibc-0 by the relayer
+# build and lanch a chain to be recognized as ibc-0 by the relayer
 RUST_BACKTRACE=full RUST_LOG="runtime::pallet-ibc=trace,ibc-rs=trace" ./target/debug/node-template --dev -d .ibc-0 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
-
-# in terminal 2: build and lanch a chain to be recognized as ibc-1 by the relayer
-RUST_BACKTRACE=full RUST_LOG="runtime::pallet-ibc=trace,ibc-rs=trace" ./target/debug/node-template --dev -d .ibc-1 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
-
 ```
+
+in terminal 2:
+```bash
+# in terminal 2:
+git clone --branch feature/ics20-ibc-1 https://github.com/octopus-network/substrate.git substrate-ibc1
+
+cd substrate-ibc1
+git reset --hard 23d5504a843abd5d91232a3878fd790059adf884
+git submodule update --init
+git pull
+rm bin/node-template/octopus-pallets/Cargo.toml
+rm -rf .ibc-*
+cargo build -p node-template 
+
+# build and lanch a chain to be recognized as ibc-1 by the relayer
+RUST_BACKTRACE=full RUST_LOG="runtime::pallet-ibc=trace,ibc-rs=trace" ./target/debug/node-template --dev -d .ibc-1 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true  --port 2033 --ws-port 8844
+```
+
 * (Option)explore the chains info and events via polkadot.js:   
     https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer  
     https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/explorer
@@ -75,7 +91,7 @@ cargo run -- ibc-transfer ws://localhost:8844 bob alice ibc/04C1A8B4EC211C896309
 
 ![image](assets/ics20-receive-event.png)
 
-* Verify balance in demo front-end
+* Verify balance in demo front-end in terminal 6
 ```bash
 git clone https://github.com/octopus-network/ibc-frontend-demo.git
 cd ibc-frontend-demo
@@ -83,6 +99,7 @@ yarn install
 yarn start
 ```
 Visit http://localhost:8000/octopus-network/ibc-frontend-demo and verifying balance as the capture below
+
 ![image](assets/ics20-balance-verify.png)
 
 
@@ -90,6 +107,6 @@ Visit http://localhost:8000/octopus-network/ibc-frontend-demo and verifying bala
 Visit http://localhost:8000/octopus-network/ibc-frontend-demo and refer to the instructions in the video
 
 ## Video Demo
-  Pls refer to [Youtube](https://www.youtube.com/watch?v=gWw_o0EROlk)
+  Pls refer to [Youtube](https://www.youtube.com/watch?v=pKcrPYAhPto)
 ## Issues
   N/A
