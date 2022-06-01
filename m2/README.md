@@ -15,7 +15,7 @@
 | 4.     | Substrate-Ibc Pallet | [repo](https://github.com/octopus-network/substrate-ibc/tree/feature/ics20) |
 | 5.     | Ibc Frontend Demo | [repo](https://github.com/octopus-network/ibc-frontend-demo/) |
 | 6.     | Design Spec       |  [Design](./design.md)                                                            |
-| 7.     | Operation Guide    |  [Guide](guide.md)                                                            |
+| 7.     | Testing Guide    |  [Guide](guide.md)                                                            |
 | 8.     | Video Demo           | [Youtube](https://www.youtube.com/watch?v=pKcrPYAhPto) |
 
 
