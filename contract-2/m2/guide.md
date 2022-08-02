@@ -24,7 +24,7 @@
 
 ```bash
 # in terminal 1: build and lanch a chain to be recognized as ibc-0 by the relayer
-git clone --branch feature/ics20-ibc-0 https://github.com/octopus-network/substrate.git ibc-0
+git clone https://github.com/octopus-network/barnacle/tree/release-v0.9.18 ibc-0
 cd ibc-0
 git submodule update --init
 git pull
@@ -35,7 +35,7 @@ cargo build -p node-template
 
 
 # in terminal 2: build and lanch a chain to be recognized as ibc-1 by the relayer
-git clone --branch feature/ics20-ibc-1 https://github.com/octopus-network/substrate.git ibc-1
+git clone https://github.com/octopus-network/barnacle/tree/release-v0.9.18 ibc-1
 cd ibc-1
 git submodule update --init
 git pull
