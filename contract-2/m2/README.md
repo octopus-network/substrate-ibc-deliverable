@@ -16,10 +16,10 @@ upstream
 
 | Number | Deliverable       | Comments                                                |
 | ------ | ----------------- | ------------------------------------------------------------ |
-| 1.     | Substrate chain(ibc-0) |     [repo]()   |
-| 2.     | Substrate chain(ibc-1) |     [repo]()   |
-| 3.     | Ibc rs |   [repo]()   |
-| 4.     | Substrate-Ibc Pallet | [repo]() |
+| 1.     | Substrate chain(ibc-0) |     [repo](https://github.com/octopus-network/barnacle/tree/release-v0.9.18)   |
+| 2.     | Substrate chain(ibc-1) |     [repo](https://github.com/octopus-network/barnacle/tree/release-v0.9.18)   |
+| 3.     | Ibc rs |   [repo](https://github.com/octopus-network/ibc-rs/tree/feature/ibc-v0.9.18)   |
+| 4.     | Substrate-Ibc Pallet | [repo](https://github.com/octopus-network/substrate-ibc/tree/feature/ibc-v0.9.18) |
 | 5.     | Chinese Translation of IBC Spec       |  [CN-SPec](https://github.com/octopus-network/ibc/tree/zh-cn-2022)                                                            |
 | 6.     | Workshop introducing IBC and IBC on Substrate    |  [Link](https://drive.google.com/drive/u/2/folders/1jBUafbKlWvbPpzxnuCZadYr6i9uEcrHD)                                                            |
 | 7.     | Written tutorial of the workshop           | [CN](https://docs.google.com/presentation/d/1xiSZJJ0pVONVSJi1v4yaso3leYCk6tYw2MqRvif4ZwM/edit?usp=sharing), [EN](https://docs.google.com/presentation/d/1ZOjHToR0EFJrng-hvR5tlFP2YUPVJfNmNHhRAqGIoJQ/edit?usp=sharing) |
