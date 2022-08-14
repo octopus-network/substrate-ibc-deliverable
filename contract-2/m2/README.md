@@ -25,7 +25,7 @@ upstream
 | 7.     | Written tutorial of the workshop           | [CN](https://docs.google.com/presentation/d/1xiSZJJ0pVONVSJi1v4yaso3leYCk6tYw2MqRvif4ZwM/edit?usp=sharing), [EN](https://docs.google.com/presentation/d/1ZOjHToR0EFJrng-hvR5tlFP2YUPVJfNmNHhRAqGIoJQ/edit?usp=sharing) |
 | 8.     | Live workshops about Substrate IBC module |   [LiveDemo](https://drive.google.com/drive/u/2/folders/1rFUOIyW1HMWYf5f_J8E7uJ_RA9Srbo2I)   |
 | 9.     | Tutorial of live workshop | [CN](./guide-cn.md), [EN](./guide.md) |
-| 10.    | Testnet Bug Fix | [CN](./guide-cn.md), [EN](./guide.md) |
+| 10.    | Testnet Bug Fix | [Testnet Bug Fix](#testnet-bug-fix) |
 
 ## Testnet Bug Fix
 
