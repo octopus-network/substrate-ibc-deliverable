@@ -25,3 +25,18 @@ upstream
 | 7.     | Written tutorial of the workshop           | [CN](https://docs.google.com/presentation/d/1xiSZJJ0pVONVSJi1v4yaso3leYCk6tYw2MqRvif4ZwM/edit?usp=sharing), [EN](https://docs.google.com/presentation/d/1ZOjHToR0EFJrng-hvR5tlFP2YUPVJfNmNHhRAqGIoJQ/edit?usp=sharing) |
 | 8.     | Live workshops about Substrate IBC module |   [LiveDemo](https://drive.google.com/drive/u/2/folders/1rFUOIyW1HMWYf5f_J8E7uJ_RA9Srbo2I)   |
 | 9.     | Tutorial of live workshop | [CN](./guide-cn.md), [EN](./guide.md) |
+| 10.    | Testnet Bug Fix | [CN](./guide-cn.md), [EN](./guide.md) |
+
+## Testnet Bug Fix
+
+### It takes a long time to create a channel. (Took 6.5 minutes on my laptop)
+Furthermore, in the BEEFY protocol set in the deliverable, the MMR root is updated every 8 blocks. So the cross-chain event needs at least 8 blocks' time to be verified. While Cosmos(tendermint) needs only 1~2 block time for cross-chain event verification.
+
+### Create channel doesn’t work if the MMR update service isn’t running (although this might be the intended behaviour).
+It's an open issue logged [here](https://github.com/informalsystems/ibc-rs/issues/1775), which is up to the architecture decision from ibc-rs. Individual MMR root update service is a temporary solution.
+
+### Hermes seems to query the chains very often, more than once per second. (query_client_state)
+The querying frequency is configured here, It's set to query every 200 ms until the substrate chain replies with a positive value , at most querying 100 times. Because after the relayer submits a tx to the substrate chain, it will take a few seconds for the tx to be accepted, if no error. And the time a substrate chain accepts a tx is variant.
+
+In the Cosmos handling logic in the relayer,  the querying interval is [300 ms](https://github.com/informalsystems/ibc-rs/blob/d9c6f897097315a6b67df063ec682f13b4cffbba/relayer/src/chain/cosmos/wait.rs#L16). We set the same interval for Substrate. 
+
