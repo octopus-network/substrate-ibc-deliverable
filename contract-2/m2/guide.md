@@ -30,6 +30,9 @@ git submodule update --init
 git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
+cd bin/node-template/octopus-pallets
+git switch release-v0.9.13
+cd ../../..
 cargo build -p node-template 
 ./target/debug/node-template --dev --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
 
@@ -41,6 +44,9 @@ git submodule update --init
 git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
+cd bin/node-template/octopus-pallets
+git switch release-v0.9.13
+cd ../../..
 cargo build -p node-template
 ./target/debug/node-template --dev --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
 
