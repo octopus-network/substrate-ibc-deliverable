@@ -20,6 +20,15 @@
   ![image](assets/import_step2.jpeg)  
   ![image](assets/import_step3.jpeg)  
   ![image](assets/import_step4.jpeg)  
+  
+- install rust
+```bash
+rustup default stable
+rustup update
+rustup update nightly
+rustup target add wasm32-unknown-unknown --toolchain nightly
+```
+  
 ## Launch 2 IBC Enabled Substrate Chains Locally
 
 ```bash
