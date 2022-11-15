@@ -33,29 +33,23 @@ rustup target add wasm32-unknown-unknown --toolchain nightly
 
 ```bash
 # in terminal 1: build and lanch a chain to be recognized as ibc-0 by the relayer
-git clone https://github.com/octopus-network/barnacle/tree/release-v0.9.18 ibc-0
+git clone -b feature/m4-hermes1.0 git@github.com:octopus-network/substrate.git ibc-0
 cd ibc-0
 git submodule update --init
 git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
-cd bin/node-template/octopus-pallets
-git switch release-v0.9.13
-cd ../../..
 cargo build -p node-template 
 ./target/debug/node-template --dev --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
 
 
 # in terminal 2: build and lanch a chain to be recognized as ibc-1 by the relayer
-git clone https://github.com/octopus-network/barnacle/tree/release-v0.9.18 ibc-1
+git clone -b feature/m4-hermes1.0-ibc-1 git@github.com:octopus-network/substrate.git  ibc-1
 cd ibc-1
 git submodule update --init
 git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
-cd bin/node-template/octopus-pallets
-git switch release-v0.9.13
-cd ../../..
 cargo build -p node-template
 ./target/debug/node-template --dev --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
 
@@ -65,24 +59,13 @@ cargo build -p node-template
     https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/explorer
 
 
-## Start mmr root update service
-```bash
-# in terminal 3: start mmr root update serivce
-git clone --branch feature/v0.9.13 https://github.com/octopus-network/octopusxt.git
-cd octopusxt
-# start mmr root update service,this service maybe merged into relayer in the future
-cargo test test_update_client_state_service -- --nocapture 
-```
-
 ## Create channel between two substrate nodes
 * Build the Relayer
 ```bash
 # in terminal 4
-git clone --branch feature/ics20 https://github.com/octopus-network/ibc-rs.git
+git clone --branch feature/m4-hermes1.0 git@github.com:octopus-network/hermes.git ibc-rs
 cd ibc-rs
 cargo build
-# check version
-./target/debug/hermes -c  config.toml --version
 ```
 * Add keys to the Relayer
 ```bash
@@ -99,7 +82,6 @@ RUST_BACKTRACE=full
 
 # start the relayer
 ./target/debug/hermes -c config.toml start  
-
 ```
 
 ## Top-up for test account
