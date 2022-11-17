@@ -1,13 +1,15 @@
 # Operation Guide
 
+* The video demo is the same as [the one in the previous milestone](https://www.youtube.com/watch?v=pKcrPYAhPto), except the individual MMR root update service is not needed, as it's already integrated into Hermes.
+
 ## Requirements
 
 - Install [polkadot wallet extension](https://polkadot.js.org/extension/)
 - Import test accounts : David and Davirain
   - create accounts
   ```bash
-    gaiad keys add david --output json > david_seed.json
-    gaiad keys add davidrain --output json > davidrain_seed.json
+    ./target/debug/hermes -c config.toml keys add ibc-0 -f ./david_seed.json
+    ./target/debug/hermes -c config.toml keys add ibc-1 -f ./davirain_seed.json
   ```
 
   - The mnemonic words for both accounts are here :
