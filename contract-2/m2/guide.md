@@ -5,19 +5,19 @@
 ## Requirements
 
 - Install [polkadot wallet extension](https://polkadot.js.org/extension/)
-- Import test accounts : David and Davirain
+- Create test accounts: David and Davirain
   - create accounts
   ```bash
     gaiad keys add david --output json > david_seed.json
     gaiad keys add davidrain --output json > davidrain_seed.json
   ```
 
-  - The mnemonic words for both accounts are here :
+  - The mnemonic used in this guide :
     - David   
     >ecology agent adjust admit raw castle rather travel asthma good say field away vote timber miss demand mandate rib print sport vault warfare thrive
     - Davirian   
     >lawn lunch neutral task waste pioneer grape setup stumble copy squirrel wasp language speed slam output blur three squeeze network awful spoon monkey spare  
-  - The screenshots below shows how to import the accounts  
+- Import the accounts to Polkadot.js
   ![image](assets/import_step1.jpeg)  
   ![image](assets/import_step2.jpeg)  
   ![image](assets/import_step3.jpeg)  
