@@ -1,6 +1,6 @@
 # Operation Guide
 
-* The video demo is the same as [the one in the previous milestone](https://www.youtube.com/watch?v=pKcrPYAhPto), except the individual MMR root update service is not needed, as it's already integrated into Hermes.
+* Note: Browser refresh may be needed if you fail to transact on browser.
 
 ## Requirements
 
@@ -8,8 +8,8 @@
 - Import test accounts : David and Davirain
   - create accounts
   ```bash
-    ./target/debug/hermes -c config.toml keys add ibc-0 -f ./david_seed.json
-    ./target/debug/hermes -c config.toml keys add ibc-1 -f ./davirain_seed.json
+    gaiad keys add david --output json > david_seed.json
+    gaiad keys add davidrain --output json > davidrain_seed.json
   ```
 
   - The mnemonic words for both accounts are here :
@@ -35,25 +35,25 @@ rustup target add wasm32-unknown-unknown --toolchain nightly
 
 ```bash
 # in terminal 1: build and lanch a chain to be recognized as ibc-0 by the relayer
-git clone -b feature/m4-hermes1.0 git@github.com:octopus-network/substrate.git ibc-0
+git clone -b feature/m4v3-hermes1.0 git@github.com:octopus-network/substrate.git ibc-0
 cd ibc-0
 git submodule update --init
 git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
 cargo build -p node-template 
-./target/debug/node-template --dev --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
+./target/debug/node-template --dev -d .ibc-0 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true
 
 
 # in terminal 2: build and lanch a chain to be recognized as ibc-1 by the relayer
-git clone -b feature/m4-hermes1.0-ibc-1 git@github.com:octopus-network/substrate.git  ibc-1
+git clone -b feature/m4v3-hermes1.0-ibc1 git@github.com:octopus-network/substrate.git  ibc-1
 cd ibc-1
 git submodule update --init
 git pull
 rm bin/node-template/octopus-pallets/Cargo.toml
 rm -rf .ibc-*
 cargo build -p node-template
-./target/debug/node-template --dev --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
+./target/debug/node-template --dev -d .ibc-1 --rpc-methods=unsafe --ws-external --enable-offchain-indexing true --port 2033 --ws-port 8844
 
 ```
 * (Option)explore the chains info and events via polkadot.js:   
@@ -65,32 +65,32 @@ cargo build -p node-template
 * Build the Relayer
 ```bash
 # in terminal 4
-git clone --branch feature/m4-hermes1.0 git@github.com:octopus-network/hermes.git ibc-rs
+git clone --branch feature/m4v3-hermes1.0 git@github.com:octopus-network/hermes.git ibc-rs
 cd ibc-rs
 cargo build
 ```
 * Add keys to the Relayer
 ```bash
 # in terminal 4
-./target/debug/hermes -c  config.toml keys add -n david -f david_seed.json ibc-0
-./target/debug/hermes -c  config.toml keys add -n davirain -f davirain_seed.json ibc-1
+./target/debug/hermes --config  config.toml keys add -n david -f david_seed.json ibc-0
+./target/debug/hermes --config  config.toml keys add -n davirain -f davirain_seed.json ibc-1
 
 ```
 * Create channel 
 ```bash
 # in terminal 4
-RUST_BACKTRACE=full  
-./target/debug/hermes -c config.toml  create channel --port-a transfer --port-b transfer ibc-0 -c ibc-1 -o unordered --new-client-connection 
+./target/debug/hermes --config config.toml create channel --a-chain ibc-0 --b-chain ibc-1 --a-port transfer --b-port transfer --order unordered --new-client-connection 
 
+# After the channel is created for both parties
 # start the relayer
-./target/debug/hermes -c config.toml start  
+./target/debug/hermes --config config.toml start
 ```
 
 ## Top-up for test account
 - Deposit a certain amount of assets to the David account on ibc-0
   1. access ibc-0 extrinsics module via polkadot.js  
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/extrinsics
-  2. transfer 500000000000000000000 to David from Alice
+  2. transfer 50000000000 to David from Alice
   ![image](assets/d2d.jpeg)
   3. query the balance of David on ibc-0  
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/accounts
@@ -99,7 +99,7 @@ RUST_BACKTRACE=full
 - Deposit a certain amount of assets to the Davirian account on ibc-1
   1. access ibc-1 extrinsics module via polkadot.js  
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/extrinsics
-  2. transfer 500000000000000000000 to Davirian from Alice
+  2. transfer 50000000000 to Davirian from Alice
   ![image](assets/d2dr.jpeg)
   3. query the balance of Davirian on ibc-1
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/accounts 
@@ -126,7 +126,7 @@ RUST_BACKTRACE=full
 - Transfer OCT from ibc-0(david) to ibc-1(davirain)
 ```bash
 # in terminal 5
-./target/debug/hermes -c config.toml tx raw ft-transfer ibc-1 ibc-0 transfer channel-0 100000000000000000000 -o 9999 -d OCT
+ ./target/debug/hermes --config config.toml tx ft-transfer --receiver-chain ibc-1 --sender-chain ibc-0 --sender-port transfer --sender-channel channel-0 --amount 1000000000000000000 --denom OCT
 ```
 - query the transfer events via polkadot.js  
 > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer 
@@ -150,7 +150,7 @@ cargo run -- denom-trace transfer channel-0 OCT
 - Transfer OCT back to ibc-0(david) from ibc-1(davirain)
 ```bash
 # in terminal 5
-./target/debug/hermes -c config.toml tx raw ft-transfer ibc-0 ibc-1 transfer channel-0 100000000000000000000 -o 9999 -d ibc/93B4B75C6D876BD9168CB4FA8B78D3D9C916FD3100EAF8A6AD3B3093661E8B9E
+./target/debug/hermes --config config.toml tx ft-transfer --receiver-chain ibc-0 --sender-chain ibc-1 --sender-port transfer --sender-channel channel-0 --amount 999 --denom ibc/93B4B75C6D876BD9168CB4FA8B78D3D9C916FD3100EAF8A6AD3B3093661E8B9E
 ```
 - query the transfer events and result via polkadot.js
 ![image](assets/ibc-1-back.jpeg)
