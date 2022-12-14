@@ -26,6 +26,10 @@ upstream
 | 8.     | Live workshops about Substrate IBC module |   [LiveDemo](https://drive.google.com/drive/u/2/folders/1rFUOIyW1HMWYf5f_J8E7uJ_RA9Srbo2I)   |
 | 9.     | Tutorial of live workshop | [CN](./guide-cn.md), [EN](./guide.md) |
 | 10.    | Testnet Bug Fix | [Testnet Bug Fix](#testnet-bug-fix) |
+| 11.    | Operation Demo | [Substrate Ibc M4 Demo](https://www.youtube.com/watch?v=KmNE4WmP5mo) |
+
+Note:
+* The ibc-rs repo is restuctured amid the progress of this milestone. Please refer to the "Operation Demo" for testing.
 
 ## Testnet Bug Fix
 

@@ -77,7 +77,7 @@ RUST_BACKTRACE=full
 - 向ibc-0的David转帐
   1. 访问 ibc-0 的 extrinsics 模块  
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/extrinsics
-  2. Alice转 500000000000000000000 给 David 
+  2. Alice转 5000000000000000000 给 David 
   ![image](assets/d2d.jpeg)
   3. 查询ibc-0上的David的余额   
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/accounts
@@ -86,7 +86,7 @@ RUST_BACKTRACE=full
 - 向ibc-1的Davidrain转帐
   1. 访问 ibc-1 的 extrinsics 模块  
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/extrinsics
-  2. Alice转 500000000000000000000 给 Davidrain
+  2. Alice转 5000000000000000000 给 Davidrain
   ![image](assets/d2dr.jpeg)
   3. 查询ibc-1上的Davidrain的余额
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/accounts 
@@ -126,18 +126,10 @@ RUST_BACKTRACE=full
 
 ![image](assets/ibc-1-result.jpeg) 
 
-- 生成 denom trace 哈希  
-```bash
-# in terminal 6
-cd octopusxt 
-cargo run -- denom-trace transfer channel-0 OCT
-# output like: ibc/93B4B75C6D876BD9168CB4FA8B78D3D9C916FD3100EAF8A6AD3B3093661E8B9E
-```
-
 - 从 ibc-1(davirain) 向 ibc-0(david) 转OCT
 ```bash
 # in terminal 5
-./target/debug/hermes -c config.toml tx raw ft-transfer ibc-0 ibc-1 transfer channel-0 100000000000000000000 -o 9999 -d ibc/93B4B75C6D876BD9168CB4FA8B78D3D9C916FD3100EAF8A6AD3B3093661E8B9E
+./target/debug/hermes --config config.toml tx ft-transfer --receiver-chain ibc-0 --sender-chain ibc-1 --sender-port transfer --sender-channel channel-0 --amount 1000000000000000000 --denom transfer/channel-0/OCT
 ```
 - 通过 polkadot.js 查询跨链转帐事件和结果
 ![image](assets/ibc-1-back.jpeg)

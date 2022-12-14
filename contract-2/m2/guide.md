@@ -90,7 +90,7 @@ cargo build
 - Deposit a certain amount of assets to the David account on ibc-0
   1. access ibc-0 extrinsics module via polkadot.js  
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/extrinsics
-  2. transfer 50000000000 to David from Alice
+  2. transfer 5000000000000000000 to David from Alice
   ![image](assets/d2d.jpeg)
   3. query the balance of David on ibc-0  
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/accounts
@@ -99,7 +99,7 @@ cargo build
 - Deposit a certain amount of assets to the Davirian account on ibc-1
   1. access ibc-1 extrinsics module via polkadot.js  
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/extrinsics
-  2. transfer 50000000000 to Davirian from Alice
+  2. transfer 5000000000000000000 to Davirian from Alice
   ![image](assets/d2dr.jpeg)
   3. query the balance of Davirian on ibc-1
   > https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8844#/accounts 
@@ -139,18 +139,11 @@ cargo build
 
 ![image](assets/ibc-1-result.jpeg) 
 
-- Get denom trace hash  
-```bash
-# in terminal 6
-cd octopusxt 
-cargo run -- denom-trace transfer channel-0 OCT
-# output like: ibc/93B4B75C6D876BD9168CB4FA8B78D3D9C916FD3100EAF8A6AD3B3093661E8B9E
-```
 
 - Transfer OCT back to ibc-0(david) from ibc-1(davirain)
 ```bash
 # in terminal 5
-./target/debug/hermes --config config.toml tx ft-transfer --receiver-chain ibc-0 --sender-chain ibc-1 --sender-port transfer --sender-channel channel-0 --amount 999 --denom ibc/93B4B75C6D876BD9168CB4FA8B78D3D9C916FD3100EAF8A6AD3B3093661E8B9E
+./target/debug/hermes --config config.toml tx ft-transfer --receiver-chain ibc-0 --sender-chain ibc-1 --sender-port transfer --sender-channel channel-0 --amount 1000000000000000000 --denom transfer/channel-0/OCT
 ```
 - query the transfer events and result via polkadot.js
 ![image](assets/ibc-1-back.jpeg)
