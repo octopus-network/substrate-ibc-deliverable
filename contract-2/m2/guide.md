@@ -35,7 +35,7 @@ rustup target add wasm32-unknown-unknown --toolchain nightly
 
 ```bash
 # in terminal 1: build and lanch a chain to be recognized as ibc-0 by the relayer
-git clone -b feature/m4v3-hermes1.0 git@github.com:octopus-network/substrate.git ibc-0
+git clone -b feature/m4v4-hermes1.0 git@github.com:octopus-network/substrate.git ibc-0
 cd ibc-0
 git submodule update --init
 git pull
@@ -46,7 +46,7 @@ cargo build -p node-template
 
 
 # in terminal 2: build and lanch a chain to be recognized as ibc-1 by the relayer
-git clone -b feature/m4v3-hermes1.0-ibc1 git@github.com:octopus-network/substrate.git  ibc-1
+git clone -b feature/m4v4-hermes1.0-ibc1 git@github.com:octopus-network/substrate.git  ibc-1
 cd ibc-1
 git submodule update --init
 git pull
@@ -65,7 +65,7 @@ cargo build -p node-template
 * Build the Relayer
 ```bash
 # in terminal 4
-git clone --branch feature/m4v3-hermes1.0 git@github.com:octopus-network/hermes.git ibc-rs
+git clone --branch feature/m4v4-hermes1.0 git@github.com:octopus-network/hermes.git ibc-rs
 cd ibc-rs
 cargo build
 ```
