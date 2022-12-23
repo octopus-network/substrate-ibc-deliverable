@@ -29,7 +29,7 @@ b. Written tutorial version of the workshop, available in English and Chinese
 | 12.    | PR to upstream Substrate | https://github.com/paritytech/substrate/pull/13011 |
 
 Note:
-* The ibc-rs repo is restuctured amid the progress of this milestone. Please refer to the "Operation Demo" as the testing guide.
+* Please refer to the "Operation Demo" as the testing guide.
 
 ## Testnet Bug Fix
 
