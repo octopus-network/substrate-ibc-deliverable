@@ -8,8 +8,7 @@ a.Host workshop online (recorded and made available for Cosmos Code With Us at t
 b. Written tutorial version of the workshop, available in English and Chinese
 3. Live workshops about Substrate IBC module (pallet-ibc)
 4. Testnet bug fixes
-5. PR to upstream Substrate or releasing a customized Substrate, depending on
-upstream
+5. PR to upstream Substrate or releasing a customized Substrate, depending on upstream
 
 
 ## Related artifacts
@@ -27,9 +26,10 @@ upstream
 | 9.     | Tutorial of live workshop | [CN](./guide-cn.md), [EN](./guide.md) |
 | 10.    | Testnet Bug Fix | [Testnet Bug Fix](#testnet-bug-fix) |
 | 11.    | Operation Demo | [Substrate Ibc M4 Demo](https://www.youtube.com/watch?v=KmNE4WmP5mo) |
+| 12.    | PR to upstream Substrate | https://github.com/paritytech/substrate/pull/13011 |
 
 Note:
-* The ibc-rs repo is restuctured amid the progress of this milestone. Please refer to the "Operation Demo" for testing.
+* The ibc-rs repo is restuctured amid the progress of this milestone. Please refer to the "Operation Demo" as the testing guide.
 
 ## Testnet Bug Fix
 
