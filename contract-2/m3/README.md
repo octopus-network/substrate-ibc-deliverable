@@ -15,7 +15,7 @@ Currently, substrate-ibc has implemented most of the IBC TAO and IBC ICS20 relat
 
 * Cosmos chain integrated ibc-go  
 The Octopus Network has implemented the ics10 grandpa light client prototype in ibc-go, the cosmos chain that integrated of this version of the ibc-go can interact with the substrate chain that intetrated substrate-ibc.  
-The ics10 grandpa light client relies on the substrate beefy feature to complete the verification, please refer to [here](https://github.com/paritytech/grandpa-bridge-gadget/blob/master/docs/beefy.md) for beefy
+The ics10 grandpa light client relies on the substrate beefy feature to complete the verification, for more about beefy, please refer [here](https://github.com/paritytech/grandpa-bridge-gadget/blob/master/docs/beefy.md).
 * Hermes relayer  
 In order to implement cross-chain interaction between cosmos chain and substrate chain, we have added support for substrate in hermes.
 
@@ -35,13 +35,3 @@ In order to implement cross-chain interaction between cosmos chain and substrate
 ## Demo presentation
 For a demonstration of cross-chain interaction between cosmos chain and substrate chain, please refer [here](./guide.md)
 
-## Issues  
-
-This milestone mainly verifies (POC) the cross-chain interaction between cosmos and substrate based on the ibc protocol, and due to the differences between cosmos sdk and substrate sdk, the following issues remain to be solved:
-
-* substrate-ibc  
-    unimpl Context::host_consensus_state and Context::pending_host_consensus_state
-* ibc-go ics10 light client  
-    unsupport ics10 upgrade and misbehaviour
-
-We will focus on the above issues in the next phase, please be informed!
