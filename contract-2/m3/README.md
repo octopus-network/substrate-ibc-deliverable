@@ -23,12 +23,12 @@ In order to implement cross-chain interaction between cosmos chain and substrate
 
 | Repo Name | Branch | Note |
 | --- | --- | --- |
-| Hermes | [icf-m3](https://github.com/octopus-network/hermes/tree/icf-m3) | IBC relayer |
+| Hermes | [icf-m3](https://github.com/octopus-network/hermes/tree/icf-m3) | supports the substrate chain |
 |  |  |  |
 | substrate-ibc | [icf-m3](https://github.com/octopus-network/substrate-ibc/tree/icf-m3) | based on ibc-rs  |
 | polkadot | [icf-m3](https://github.com/octopus-network/polkadot/tree/icf-m3) | demo chain |
 |  |  |  |
-| ibc-go | [icf-m3](https://github.com/octopus-network/ibc-go/tree/icf-m3) | include ics10 grandpa light client |
+| ibc-go | [icf-m3](https://github.com/octopus-network/ibc-go/tree/icf-m3) | includes ics10 grandpa light client |
 | oct-planet | [icf-m3](https://github.com/octopus-network/oct-planet/tree/icf-m3) | demo chain |
 |  |  |  |
 
